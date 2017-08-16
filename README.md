@@ -1,9 +1,9 @@
-# Recruiting
+# Javascript Terminal Emulation
 
-## Basic GitHubPages repo for recruiting candidates
 
-It simulates a terminal, where possible candidates can issue commands to get further info about our current vacancies.
+It simulates a terminal, which you can easily extend with your own commands.
+In the example, it's used to mimic a console application where a possible candidates can issue commands to get further info about current vacancies, and even submit an application
 
-**Right now it's still just a proof of concept... no real positions are here, nor it's being pushed in social networks**
+It's so basic it can even be server from a GitHub page... you can test it on https://lordkhizir.github.io/js-terminal-emulator/
 
 ![Screenshot](./screenshot.png)
