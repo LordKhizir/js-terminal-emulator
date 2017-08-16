@@ -1,15 +1,14 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="terminal.css" media="screen" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="terminal.js"></script>
+		<script src="terminal.js" defer></script>
 		<script src="terminal_config.js"></script>
 	</head>
   	<body>
 		<main>
-			<span id="history"></span>
-			<span class="command"><input type="text" /></span>
-			<span class="screen-bottom">&nbsp;</span>
+			<span id="histo"></span>
+			<span class="command" id="commandSpan"><input type="text" id="commandInput"/></span>
+			<span class="screen-bottom" id="screenBottom">&nbsp;</span>
 		</main>
 	</body>
 </html>

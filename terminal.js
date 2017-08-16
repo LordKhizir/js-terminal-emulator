@@ -8,34 +8,34 @@
  * @license: MIT
  */
 
-// Initialization - defined in terminal_config.js
 
 // Declare html elements
-var commandInput;
 var histo;
-$(document).ready(function() {
-  $('span.command').prepend(config.prompt);
-  commandInput = $('input[type="text"]');
-  histo = $('span#history');
-  histo.append("<pre>Welcome to " + config.title + "\n" +
-    "Type 'help' + Enter -- for available commands.</pre>");
-  commandInput.focus();
-  commandInput.keyup(function(e){
-    if(e.which == 13){// ENTER key pressed
-      var issuedCommand = commandInput.val();
-      if (issuedCommand) {
-        issuedCommand=issuedCommand.replace(/[^a-z0-9\s]/gi, '') // sanitize
-      }
-      doCommand(issuedCommand);
+var commandInput;
+
+// Initialization - defined in terminal_config.js
+document.getElementById("commandSpan").innerHTML=config.prompt + document.getElementById("commandSpan").innerHTML;
+commandInput = document.getElementById('commandInput');
+histo = document.getElementById('histo');
+histo.innerHTML+="<pre>Welcome to " + config.title + "\n" +
+  "Type 'help' + Enter -- for available commands.</pre>";
+commandInput.focus();
+addEvent(commandInput, "keyup", commandKeyPress);
+
+function commandKeyPress(e) {
+  if(e.which == 13){// ENTER key pressed
+    var issuedCommand = commandInput.value;
+    if (issuedCommand) {
+      issuedCommand=issuedCommand.replace(/[^a-z0-9\s]/gi, '') // sanitize
     }
-  });
-});
+    commandInput.value = "";
+    doCommand(issuedCommand);
+  }
+}
 
 function doCommand(issuedCommand) {
-  // remove command
-  commandInput.val("");
   // add prompt + command to history
-  histo.append("<pre>" + config.prompt + " " + issuedCommand + "</pre>");
+  histo.innerHTML+="<pre>" + config.prompt + " " + issuedCommand + "</pre>";
   // analyze command
   if (issuedCommand) {
     commandArgs = issuedCommand.split(" ")
@@ -48,7 +48,7 @@ function doCommand(issuedCommand) {
     }
   }
   // move focus
-  $("screen-bottom").scrollIntoView({block: "end", behavior: "smooth"});
+  document.getElementById("screenBottom").scrollIntoView({block: "end", behavior: "smooth"});
   commandInput.focus();
 }
 
@@ -66,23 +66,30 @@ String.prototype.padRight = function(char, length) {
     return this + char.repeat(Math.max(0, length - this.length));
 }
 
+function addEvent(element, eventName, callback) {
+    if (element.addEventListener) {
+        element.addEventListener(eventName, callback, false);
+    } else if (element.attachEvent) {
+        element.attachEvent("on" + eventName, callback);
+    }
+}
 
 /* BASE COMMANDS */
 function doCommandClear() {
-  histo.empty();
+  histo.innerHTML="";
 }
 
 function doCommandHelp() {
-  histo.append("<pre>" + config.title + "\n"
+  histo.innerHTML+="<pre>" + config.title + "\n"
     + "These shell commands are defined internally.  Type 'help' to see this list.\n"
-    + "Type 'help name' to find out more about the function 'name'\n\n</pre>")
+    + "Type 'help name' to find out more about the function 'name'\n\n</pre>";
   var allCommandsText = "";
   for (let command of config.commands) {
     allCommandsText+= command.syntax.padRight(" ", 24) +  command.description + "\n";
   }
-  histo.append("<pre>" + allCommandsText + "</pre>")
+  histo.innerHTML+="<pre>" + allCommandsText + "</pre>";
 }
 
 function doCommandUnknown(command) {
-  histo.append("<pre>" + command + " : command not found</pre>");
+  histo.innerHTML+="<pre>" + command + " : command not found</pre>";
 }

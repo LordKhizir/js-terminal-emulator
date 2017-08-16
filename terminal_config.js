@@ -51,19 +51,18 @@ function doCommandPosition(arguments) {
   if (key) {
     var position = _getPositionByKey(key);
     if (position) {
-      histo.append("<pre>key: " + position.key + "\n"
-        + "role: " + position.role + "</pre>");
+      histo.innerHTML+="<pre>key: " + position.key + "\nrole: " + position.role + "</pre>";
     } else {
-      histo.append("<pre>No position found for key '" + key + "'</pre>");
+      histo.innerHTML+="<pre>No position found for key '" + key + "'</pre>";
     }
   } else {
-    histo.append("<pre>Missing position key</pre>");
+    histo.innerHTML+="<pre>Missing position key</pre>";
   }
 }
 
 function doCommandPositions() {
     for (let position of data.positions) {
-      histo.append("<pre>" + position.key + "</pre>")
+      histo.innerHTML+="<pre>" + position.key + "</pre>";
     }
 }
 
@@ -73,15 +72,15 @@ function doCommandApply(arguments) {
     var position = _getPositionByKey(key);
     if (position) {
       var mailURL = "mailto:" + data.emailRecipient + "?subject=Position%20" + position.key + "&body=Please%20get%20back%20to%20me%20with%20more%20info";
-      histo.append("<pre>Creating application email to position key: " + position.key + ", role: " + position.role + "\n"
+      histo.innerHTML+="<pre>Creating application email to position key: " + position.key + ", role: " + position.role + "\n"
         + "Please add your contact information and send it\n"
-        + "If nothing happens, due to pop-up blocking or other issues, you can also send it through this link</pre>");
-      histo.append("<a href='" + mailURL + "'>Click here to send email</a><br/><br/>");
+        + "If nothing happens, due to pop-up blocking or other issues, you can also send it through this link</pre>";
+      histo.innerHTML+="<a href='" + mailURL + "'>Click here to send email</a><br/><br/>";
       window.location.href(mailURL);
     } else {
-      histo.append("<pre>No position found for key " + key + "</pre>");
+      histo.innerHTML+="<pre>No position found for key " + key + "</pre>";
     }
   } else {
-    histo.append("<pre>Missing position key</pre>");
+    histo.innerHTML+="<pre>Missing position key</pre>";
   }
 }
