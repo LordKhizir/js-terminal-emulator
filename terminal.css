@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+html {
+  background: #000;
+  overflow-y: scroll;
+}
+
+body, pre, span, input {
+  font: 1em 'Inconsolata';
+  color: #ffffff;
+  font-weight: 400;
+  padding:0;
+}
+
+textarea, input, button, select { font-family: inherit; font-size: inherit; }
+
+span.command {
+  width:90%
+}
+input[type="text"]{
+  margin:0 0.5em;
+  border: none;
+  background: #000;
+  width:50%
+}
+input[type="text"]:focus{
+  background: #000;
+  color: #fff;
+  outline:none;
+}
