@@ -1,4 +1,4 @@
-# Javascript Terminal Emulation
+# Basic Javascript Terminal Emulation
 
 
 It simulates a terminal, which you can easily extend with your own commands.
